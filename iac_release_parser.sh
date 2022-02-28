@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /var/lib/jenkins/git/cloud-market-data/jenkins_tools/git_auth.cfg
+source 'auth.cfg with token(s)'
 
 /usr/local/bin/gh config set git_protocol ssh --host github.factset.com
 /usr/local/bin/gh auth login -h github.factset.com --with-token < <(echo "${githubTokenGUI}")
