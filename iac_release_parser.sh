@@ -14,6 +14,7 @@ repoOwner=`echo $repoName | cut -d':' -f2 | cut -d'/' -f1`
 devopsRepo="git@github.factset.com:market-data-cloud/devops_test.git"
 devopsReleases=`/usr/local/bin/gh release list -L 50 -R $devopsRepo | awk '{print $1}' | sed 's/^v//; s/^V//' | grep -Eo "[0-9]+.[0-9]+.[0-9]+(-\w+)?(\.\w+)?" | tr "\n" " "`
 devopsReleasesDD=`/usr/local/bin/gh release list -L 50 -R $devopsRepo | awk '{print $1}' | grep -Eo "(v|V)?[0-9]+.[0-9]+.[0-9]+(-\w+)?(\.\w+)?" | tr "\n" " "`
+logDir='log directory here'
 
 # parse iac.json from image repo
 parse_iac () {
@@ -33,15 +34,15 @@ parse_iac () {
   logretention=20
   loglist=$(ls -l /'add directory here'/iac_release_parser/logs/ | grep .log | awk '{print $9}' | wc -l)
 
-  if [ ! -d /var/lib/jenkins/git/cloud-market-data/jenkins_tools/iac_release_parser/logs ]; then
-    mkdir /var/lib/jenkins/git/cloud-market-data/jenkins_tools/iac_release_parser/logs
+  if [ ! -d $logDir/iac_release_parser/logs ]; then
+    mkdir $logDir/iac_release_parser/logs
   fi
 
   if [ $loglist -gt $logretention ]
   then
 
   delcount=`expr $loglist - $logretention`
-  find /var/lib/jenkins/git/cloud-market-data/jenkins_tools/iac_release_parser/logs/ -type f -printf '%T+ %p\n' | sort | head -n $delcount | awk '{print $2}' | sed 's/[^\]*logs[^\]//' | xargs -I {} rm /var/lib/jenkins/git/cloud-market-data/jenkins_tools/iac_release_parser/logs/{}
+  find $logDir/iac_release_parser/logs/ -type f -printf '%T+ %p\n' | sort | head -n $delcount | awk '{print $2}' | sed 's/[^\]*logs[^\]//' | xargs -I {} rm $logDir/iac_release_parser/logs/{}
 
   fi
 
@@ -61,7 +62,7 @@ parse_iac () {
 
   curl -s -I \
   -H "Authorization: bearer $authToken" \
-  https://api.github.factset.com/graphql > /'add directory here'/iac_release_parser/logs/cURLheader_$timestamp.log
+  https://api.github.factset.com/graphql > $logDir/iac_release_parser/logs/cURLheader_$timestamp.log
 
   fi
 
