@@ -31,7 +31,7 @@ parse_iac () {
   payloadFrmt="$(echo $payload)"
 
   logretention=20
-  loglist=$(ls -l /var/lib/jenkins/git/cloud-market-data/jenkins_tools/iac_release_parser/logs/ | grep .log | awk '{print $9}' | wc -l)
+  loglist=$(ls -l /'add directory here'/iac_release_parser/logs/ | grep .log | awk '{print $9}' | wc -l)
 
   if [ ! -d /var/lib/jenkins/git/cloud-market-data/jenkins_tools/iac_release_parser/logs ]; then
     mkdir /var/lib/jenkins/git/cloud-market-data/jenkins_tools/iac_release_parser/logs
@@ -47,7 +47,7 @@ parse_iac () {
 
   display_ver=`curl \
   -s -H "Authorization: bearer $authToken" \
-  -X POST -d "{ \"query\": \"$payloadFrmt\"}" https://api.github.factset.com/graphql \
+  -X POST -d "{ \"query\": \"$payloadFrmt\"}" https://api.github.com/graphql \
   | jq -r '.data.repository.content.text' | jq -r '.devops_release'`
 
   echo $display_ver
@@ -61,7 +61,7 @@ parse_iac () {
 
   curl -s -I \
   -H "Authorization: bearer $authToken" \
-  https://api.github.factset.com/graphql > /var/lib/jenkins/git/cloud-market-data/jenkins_tools/iac_release_parser/logs/cURLheader_$timestamp.log
+  https://api.github.factset.com/graphql > /'add directory here'/iac_release_parser/logs/cURLheader_$timestamp.log
 
   fi
 
