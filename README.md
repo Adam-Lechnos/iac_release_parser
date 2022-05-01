@@ -23,16 +23,6 @@ To be supplied at the root within source repos should the developer wished to se
 }
 ```
 
-#### Active Choices Reactive Parameter script
-```
-def proc = "/bin/bash /var/lib/jenkins//iac_release_parser/iac_release_parser.sh ${git_repo_url} ${git_release} yes".execute()
-proc.waitFor()
-def output = proc.in.text
-def exitcode = proc.exitValue()
-def error = proc.err.text
-return output.tokenize()
-```
-
 #### Usage
 Call the `iac_parser.sh` within an Active Choices Reactive Parameter dropdown in Jenkins, which upon repo selection as one of the position paramters, will return the semantic version decision against a list of available versions against the designated devops repo. The dropdown will provide the semantic version decision with no available options if the `iac.json` file is present. If this file is omiited, the dropdown will default to the latest version with a list of all available devops releases.
 * Create an `auth.cfg` file with a variable `githubTokenGUI` containing the GitHub access token.
@@ -46,3 +36,13 @@ Call the `iac_parser.sh` within an Active Choices Reactive Parameter dropdown in
 #### Example
 * The latest major release 1 of the Devops repo, as supplied by the Foobar developer repo v1.2.3
   * i.e., Foobar v1.2.3 Yes
+
+#### Active Choices Reactive Parameter script
+```
+def proc = "/bin/bash /var/lib/jenkins//iac_release_parser/iac_release_parser.sh ${git_repo_url} ${git_release} yes".execute()
+proc.waitFor()
+def output = proc.in.text
+def exitcode = proc.exitValue()
+def error = proc.err.text
+return output.tokenize()
+```
