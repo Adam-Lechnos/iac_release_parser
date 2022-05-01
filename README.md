@@ -6,7 +6,7 @@ A tool used for deciding a devops code release version based on supplied semanti
 
 #### Pre-requisited
 * Jenkins infrastructure which allows for selecting Devops code release upon build
-* A soure repo which contains a supplied iac.json file with a specified [semantic version](https://semver.org/)
+* A soure repo which contains a supplied [iac.json](#iacjson) file with a specified [semantic version](https://semver.org/)
 * [NPM package manager](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) and [NPM semver](https://www.npmjs.com/package/semver) within the Jenkins Main host
 
 #### iac.json
