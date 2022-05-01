@@ -11,7 +11,9 @@ A tool used for deciding a devops code release version based on supplied semanti
 
 #### iac.json
 To be supplied at the root within source repos should the developer wished to select a Devops release upon deploy. The Jenkins infrastructure should first be able to accomodate Devops releases.
-* The json structure contains one key/value pair labled `devops_release`
+* The json structure containing one key/value with key `devops_release`, and value being the semantic version
+* i.e., `devops_release: *.*.*` for the latest version, or omit this file
+* i.e., `devops_release: 1.*.*` for the latest major release 1 version.
 
 **Example**
 ```
@@ -19,3 +21,6 @@ To be supplied at the root within source repos should the developer wished to se
 	"devops_release": "*.*.*"
 }
 ```
+
+#### Usage
+Call the `iac_parser.sh` within an active choice paramter dropdown in Jenkins, which upon repo selection as one of the position paramters, will return the semantic version decision against a list of available versions against the designated devops repo.
