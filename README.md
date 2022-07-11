@@ -4,7 +4,7 @@ A tool used for deciding a devops code release version based on supplied semanti
 #### Intended Audience
 * Devops
 
-#### Pre-requisited
+#### Pre-requisites
 * Jenkins infrastructure which allows for selecting Devops code release upon build
 * A source repo which contains a supplied [iac.json](#iacjson) file with a specified [semantic version](https://semver.org/)
 * [NPM package manager](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) and [NPM semver](https://www.npmjs.com/package/semver) within the Jenkins Main host
