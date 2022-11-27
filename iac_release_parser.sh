@@ -3,7 +3,7 @@
 source 'auth.cfg with token(s)'
 
 /usr/local/bin/gh config set git_protocol ssh --host github.factset.com
-/usr/local/bin/gh auth login -h github.factset.com --with-token < <(echo "${githubTokenGUI}")
+/usr/local/bin/gh auth login -h github.com --with-token < <(echo "${githubTokenGUI}")
 
 authToken=$githubTokenGUI
 repoName=$1
@@ -11,7 +11,7 @@ repoRelease=$2
 isGUI=$3
 repoNameTrim=`echo $repoName | cut -d':' -f2 | cut -d'/' -f2 | sed 's/.git//g'`
 repoOwner=`echo $repoName | cut -d':' -f2 | cut -d'/' -f1`
-devopsRepo="git@github.factset.com:market-data-cloud/devops_test.git"
+devopsRepo="git@github.com:repo/devops_test.git"
 devopsReleases=`/usr/local/bin/gh release list -L 50 -R $devopsRepo | awk '{print $1}' | sed 's/^v//; s/^V//' | grep -Eo "[0-9]+.[0-9]+.[0-9]+(-\w+)?(\.\w+)?" | tr "\n" " "`
 devopsReleasesDD=`/usr/local/bin/gh release list -L 50 -R $devopsRepo | awk '{print $1}' | grep -Eo "(v|V)?[0-9]+.[0-9]+.[0-9]+(-\w+)?(\.\w+)?" | tr "\n" " "`
 logDir='log directory here'
@@ -62,7 +62,7 @@ parse_iac () {
 
   curl -s -I \
   -H "Authorization: bearer $authToken" \
-  https://api.github.factset.com/graphql > $logDir/iac_release_parser/logs/cURLheader_$timestamp.log
+  https://api.github.com/graphql > $logDir/iac_release_parser/logs/cURLheader_$timestamp.log
 
   fi
 
