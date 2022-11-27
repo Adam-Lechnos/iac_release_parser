@@ -1,5 +1,5 @@
 # iac_release_parser
-A tool used for deciding a devops code release version based on supplied semantic version value within a sourced in repo json file
+A tool used for deciding a devops code release version based on supplied semantic version value within a sourced json file from a repo.
 
 #### Intended Audience
 * Devops
