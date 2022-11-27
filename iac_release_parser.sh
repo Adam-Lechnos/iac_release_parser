@@ -2,7 +2,7 @@
 
 source 'auth.cfg with token(s)'
 
-/usr/local/bin/gh config set git_protocol ssh --host github.factset.com
+/usr/local/bin/gh config set git_protocol ssh --host github.com
 /usr/local/bin/gh auth login -h github.com --with-token < <(echo "${githubTokenGUI}")
 
 authToken=$githubTokenGUI
